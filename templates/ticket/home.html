@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visiting Information</title>
+  <style>
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 3px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+  <!-- <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var visitorTypeSelect = document.getElementById("visitor-type");
+      var individualInfo = document.getElementById("individual-info");
+      var instituteInfo = document.getElementById("institute-info");
+
+      visitorTypeSelect.addEventListener("change", function() {
+        var selectedOption = visitorTypeSelect.value;
+
+        if (selectedOption === "individual") {
+          individualInfo.style.display = "block";
+          instituteInfo.style.display = "none";
+        } else if (selectedOption === "institute") {
+          individualInfo.style.display = "none";
+          instituteInfo.style.display = "block";
+        } else {
+          individualInfo.style.display = "none";
+          instituteInfo.style.display = "none";
+        }
+      });
+    });
+  </script> -->
+</head>
+<body>
+    <!-- <div class="name">{{name}}</div><br> -->
+  <div class="container">
+    <h1>Welcome to the Museum {{name}}!</h1>
+    <form id="visiting-info-form" action="visitor" method="post">
+      {% csrf_token %}
+      <h2>Visiting Information</h2>
+      <div class="form-group">
+        <label for="museum">Select Museum:</label>
+        <select id="museum" name="museum">
+          <option value="">Select a museum</option>
+          <option value="museum1">Museum 1</option>
+          <option value="museum2">Museum 2</option>
+          <option value="museum3">Museum 3</option>
+          <!-- Add more museum options as needed -->
+        </select>
+      </div>
+      <!-- <div class="form-group">
+        <label for="visitor-type">Are you an individual or an institute?</label>
+        <select id="visitor-type" name="visitor-type">
+          <option value="">Select visitor type</option>
+          <option value="individual">Individual</option>
+          <option value="institute">Institute</option>
+        </select>
+      </div> -->
+      <div class="form-group">
+        <label for="visit-date">Visiting Date:</label>
+        <input type="date" id="visit-date" name="visit-date">
+      </div>
+      <div class="form-group">
+        <label>Contact Information:</label>
+        <!-- <input type="text" id="person-name" name="person-name" placeholder="Person's Name" required>
+        <input type="email" id="email" name="email" placeholder="Email" required> -->
+        <input type="tel" id="phone" name="phone" placeholder="Phone Number" required><br><br>
+        <input type="text" id="aadhar" name="aadhar" placeholder="Aadhar Card Number" required><br><br>
+        <label for="nationality">Nationality:</label>
+        <select id="nationality" name="nationality">
+          <option value="">Select Nationality</option>
+          <option value="country1">Country 1</option>
+          <option value="country2">Country 2</option>
+          <option value="country3">Country 3</option>
+          <!-- Add more country options as needed -->
+        </select>
+        <br><br>
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" placeholder="City" required><br><br>
+        <label for="state">State:</label>
+        <input type="text" id="state" name="state" placeholder="State" required>
+      </div>
+      <div class="form-group">
+        <label>Visitor's Information:</label><br>
+        <div id="individual-info">
+          <!-- <label for="num-adults">Number of Adults:</label> -->
+          <input type="text" id="num-adults" name="num-adults-1" placeholder="1st visitor" required><br><br>
+          <input type="text" id="num-adults" name="num-adults-2" placeholder="2nd visitor"><br><br>
+          <input type="text" id="num-adults" name="num-adults-3" placeholder="3rd visitor"><br><br>
+          <input type="text" id="num-adults" name="num-adults-4" placeholder="4th visitor"><br><br>
+          <input type="text" id="num-adults" name="num-adults-5" placeholder="5th visitor"><br><br>
+          <!-- <label for="num-children">Number of Children:</label>
+          <input type="number" id="num-children" name="num-children"> -->
+        </div>
+        <!-- <div id="institute-info">
+          <label for="institute-name">Institute Name:</label>
+          <input type="text" id="institute-name" name="institute-name">
+          <label for="num-teachers">Number of Teachers:</label>
+          <input type="number" id="num-teachers" name="num-teachers" min="0">
+          <label for="num-students">Number of Students:</label>
+          <input type="number" id="num-students" name="num-students" min="0">
+        </div> -->
+      </div>
+      <button type="submit">Next</button>
+    </form>
+  </div>
+  {% for message in messages %}
+    <script>
+          swal ( "Error" ,  '{{ message }}' ,  "error" )
+    </script>
+    {% endfor %}
+</body>
+</html>

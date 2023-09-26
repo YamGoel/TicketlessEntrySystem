@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resume Ticket Booking - Sign Up</title>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <style>
+    /* Same CSS styling as the login page */
+    /* ... */
+
+    .otp-form {
+      display: none;
+    }
+
+    .otp-form.visible {
+      display: block;
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      width: 200px;
+      height: 100px;
+    }
+
+    .signup-heading {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .signup-form input[type="text"],
+    .signup-form input[type="password"] {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: none;
+      border-bottom: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 16px;
+      transition: border-bottom-color 0.3s;
+    }
+
+    .signup-form input[type="text"]:focus,
+    .signup-form input[type="password"]:focus {
+      border-bottom-color: #4CAF50;
+      outline: none;
+    }
+
+    .signup-form button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 20px 0;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    .signup-form button:hover {
+      background-color: #45a049;
+    }
+
+    .signup-footer {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .signup-footer a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="signup-heading">Create New Account</h1>
+    <form id="signup-form" class="signup-form" action="signuppage" method="post">
+      {% csrf_token %}
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email:</label>
+      <input type="text" id="email" name="email" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required>
+
+      <label for="confirm-password">Confirm Password:</label>
+      <input type="password" id="confirm-password" name="confirm-password" required>
+
+      <button type="submit" name="button">Sign Up</button>
+    </form>
+
+    <div class="signup-footer">
+      <p> <a href="/loginpage">Log in</a></p>
+    </div>
+    {% for message in messages %}
+    <script>
+          swal ( "Error" ,  '{{ message }}' ,  "error" )
+    </script>
+    {% endfor %}
+  </div>
+</body>
+</html>
